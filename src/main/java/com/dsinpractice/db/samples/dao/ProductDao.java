@@ -36,4 +36,8 @@ public class ProductDao {
     public void deletePart(ProductPart part) {
         em.remove(em.contains(part) ? part : em.merge(part));
     }
+
+	public void merge(Product product) {
+		em.merge(product);
+	}
 }

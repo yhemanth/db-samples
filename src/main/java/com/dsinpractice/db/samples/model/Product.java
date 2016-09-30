@@ -12,40 +12,42 @@ import java.util.Set;
 @Entity
 @NamedQueries({
         @NamedQuery(
-                name="findOneProductByIdWithParts",
-                query="SELECT p FROM Product p JOIN FETCH p.parts WHERE p.id = :id"
+                name = "findOneProductByIdWithParts",
+                query = "SELECT p FROM Product p JOIN FETCH p.parts WHERE p.id = :id"
         ),
         @NamedQuery(
-                name="findOneProductById",
-                query="SELECT p FROM Product p WHERE p.id = :id"
+                name = "findOneProductById",
+                query = "SELECT p FROM Product p WHERE p.id = :id"
         )
 })
 public class Product {
 
-	@Id
-	private Integer id;
-	private String name;
+    @Id
+    private Integer id;
+    private String name;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<ProductPart> parts = new HashSet<>();
 
-	public Product() {
-	}
+    public Product() {
+    }
 
-	public Product(Integer id, String name) {
-		this.id = id;
-		this.name = name;
-	}
+    public Product(Integer id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 
-	public Integer getId() {
-		return id;
-	}
-	public void setId(Integer id) {
-		this.id = id;
-	}
-	public String getName() {
-		return name;
-	}
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
 
     @Override
     public String toString() {
@@ -57,8 +59,8 @@ public class Product {
     }
 
     public void setName(String name) {
-		this.name = name;
-	}
+        this.name = name;
+    }
 
     public Set<ProductPart> getParts() {
         return parts;

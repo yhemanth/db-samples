@@ -23,43 +23,52 @@ public class SpringOrmMain {
 		
 		//Do some data operation
         Product bulb = buildBulb();
-        Product mustard = getMustard();
-
         productService.add(bulb);
+
+        Product mustard = getMustard();
         productService.add(mustard);
 
+        // just verify things got added; also get a detached instance.
         Product product = productService.lookupProduct(2);
-        System.out.println(product);
+        System.out.println("Lookup result:" + product);
 
-        // replicates problem that part does not get deleted.
-        for (ProductPart part : product.getParts()) {
-            if (part.getName().equals("Leaf")) {
-                productService.deletePart(part);
-            }
-        }
+        // replicates problem that part does not get deleted - uncomment below line
+        //testUnsuccessfulDeleteProductPartDirect(productService, product, ctx);
 
+        // removing from collection and relying on orphan-removal
+        testSuccessfulDeleteProductPartFromCollection(ctx, productService, product);
+		ctx.close();
+		
+	}
+
+    private static void verifyDeleteAction(ClassPathXmlApplicationContext ctx, ProductService productService) {
+        listProductParts(ctx);
+        Product product1 = productService.lookupProduct(2);
+        System.out.println(product1);
+    }
+
+    private static void listProductParts(ClassPathXmlApplicationContext ctx) {
         ProductPartService productPartService = ctx.getBean(ProductPartService.class);
         List<ProductPart> productParts = productPartService.listAll();
 
         for (ProductPart p : productParts) {
             System.out.println(p);
         }
+    }
 
-//		System.out.println("listAll: " + productService.listAll());
+    private static void testSuccessfulDeleteProductPartFromCollection(ClassPathXmlApplicationContext ctx, ProductService productService, Product product) {
+        productService.deletePartByName(product, "Leaf");
+        verifyDeleteAction(ctx, productService);
+    }
 
-		//Test transaction rollback (duplicated key)
-		
-//		try {
-//			productService.addAll(Arrays.asList(new Product(3, "Book"), new Product(4, "Soap"), new Product(1, "Computer")));
-//		} catch (DataAccessException dataAccessException) {
-//		}
-		
-		//Test element list after rollback
-//		System.out.println("listAll: " + productService.listAll());
-		
-		ctx.close();
-		
-	}
+    private static void testUnsuccessfulDeleteProductPartDirect(ProductService productService, Product product, ClassPathXmlApplicationContext ctx) {
+        for (ProductPart part : product.getParts()) {
+            if (part.getName().equals("Leaf")) {
+                productService.deletePart(part);
+            }
+        }
+        verifyDeleteAction(ctx, productService);
+    }
 
     private static Product getMustard() {
         Product mustard = new Product(2, "Dijone mustard");
