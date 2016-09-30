@@ -20,4 +20,7 @@ public class ProductPartService {
         return productParts;
     }
 
+    public ProductPart lookupByName(String partName) {
+        return productPartDao.findByName(partName);
+    }
 }

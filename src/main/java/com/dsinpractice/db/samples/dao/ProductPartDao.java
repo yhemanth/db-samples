@@ -17,4 +17,7 @@ public class ProductPartDao {
         return em.createQuery("SELECT p FROM ProductPart p").getResultList();
     }
 
+    public ProductPart findByName(String partName) {
+        return (ProductPart) em.createNamedQuery("findByName").setParameter("name", partName).getResultList().get(0);
+    }
 }

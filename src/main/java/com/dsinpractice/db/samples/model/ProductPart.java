@@ -3,8 +3,17 @@ package com.dsinpractice.db.samples.model;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
 @Entity
+@NamedQueries({
+        @NamedQuery(
+                name = "findByName",
+                query = "SELECT p from ProductPart p WHERE p.name = :name"
+        )
+    }
+)
 public class ProductPart {
 
     @Id
@@ -56,8 +65,7 @@ public class ProductPart {
         ProductPart that = (ProductPart) o;
 
         if (id != null ? !id.equals(that.id) : that.id != null) return false;
-        if (name != null ? !name.equals(that.name) : that.name != null) return false;
-        return !(product != null ? !product.equals(that.product) : that.product != null);
+        return !(name != null ? !name.equals(that.name) : that.name != null);
 
     }
 
@@ -65,7 +73,6 @@ public class ProductPart {
     public int hashCode() {
         int result = id != null ? id.hashCode() : 0;
         result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + (product != null ? product.hashCode() : 0);
         return result;
     }
 

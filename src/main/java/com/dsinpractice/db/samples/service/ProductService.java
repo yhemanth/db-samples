@@ -58,4 +58,11 @@ public class ProductService {
         }
         productDao.merge(product);
     }
+
+    @Transactional
+    public void deletePartFromProduct(Product product, ProductPart productPart) {
+        boolean result = product.getParts().remove(productPart);
+        System.out.println("Deletion result: " + result);
+        productDao.merge(product);
+    }
 }
