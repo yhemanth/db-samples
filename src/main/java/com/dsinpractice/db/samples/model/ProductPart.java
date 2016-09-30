@@ -1,4 +1,4 @@
-package hu.daniel.hari.learn.spring.orm.model;
+package com.dsinpractice.db.samples.model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;

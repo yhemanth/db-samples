@@ -1,8 +1,7 @@
-package hu.daniel.hari.learn.spring.orm.model;
+package com.dsinpractice.db.samples.model;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;

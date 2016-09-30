@@ -1,15 +1,13 @@
-package hu.daniel.hari.learn.spring.orm.main;
+package com.dsinpractice.db.samples.main;
 
-import hu.daniel.hari.learn.spring.orm.model.Product;
-import hu.daniel.hari.learn.spring.orm.model.ProductPart;
-import hu.daniel.hari.learn.spring.orm.service.ProductService;
+import com.dsinpractice.db.samples.model.Product;
+import com.dsinpractice.db.samples.model.ProductPart;
+import com.dsinpractice.db.samples.service.ProductService;
 
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.dao.DataAccessException;
 
 public class SpringOrmMain {
 	

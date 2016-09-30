@@ -1,13 +1,13 @@
-package hu.daniel.hari.learn.spring.orm.dao;
+package com.dsinpractice.db.samples.dao;
 
-import hu.daniel.hari.learn.spring.orm.model.Product;
+import com.dsinpractice.db.samples.model.Product;
 
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import hu.daniel.hari.learn.spring.orm.model.ProductPart;
+import com.dsinpractice.db.samples.model.ProductPart;
 import org.springframework.stereotype.Component;
 
 @Component

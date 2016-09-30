@@ -1,12 +1,12 @@
-package hu.daniel.hari.learn.spring.orm.service;
+package com.dsinpractice.db.samples.service;
 
-import hu.daniel.hari.learn.spring.orm.dao.ProductDao;
-import hu.daniel.hari.learn.spring.orm.model.Product;
+import com.dsinpractice.db.samples.dao.ProductDao;
+import com.dsinpractice.db.samples.model.Product;
+import com.dsinpractice.db.samples.model.ProductPart;
 
 import java.util.Collection;
 import java.util.List;
 
-import hu.daniel.hari.learn.spring.orm.model.ProductPart;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
