@@ -31,11 +31,7 @@ public class ProductService {
 
 	@Transactional(readOnly = true)
 	public List<Product> listAll() {
-		List<Product> products = productDao.findAll();
-		for (Product p : products) {
-			p.getParts().size();
-		}
-		return products;
+		return productDao.findAll();
 	}
 
     @Transactional

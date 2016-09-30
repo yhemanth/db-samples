@@ -2,9 +2,11 @@ package com.dsinpractice.db.samples.main;
 
 import com.dsinpractice.db.samples.model.Product;
 import com.dsinpractice.db.samples.model.ProductPart;
+import com.dsinpractice.db.samples.service.ProductPartService;
 import com.dsinpractice.db.samples.service.ProductService;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -29,14 +31,19 @@ public class SpringOrmMain {
         Product product = productService.lookupProduct(2);
         System.out.println(product);
 
+        // replicates problem that part does not get deleted.
         for (ProductPart part : product.getParts()) {
             if (part.getName().equals("Leaf")) {
                 productService.deletePart(part);
             }
         }
 
-        Product product1 = productService.lookupProduct(2);
-        System.out.println(product1);
+        ProductPartService productPartService = ctx.getBean(ProductPartService.class);
+        List<ProductPart> productParts = productPartService.listAll();
+
+        for (ProductPart p : productParts) {
+            System.out.println(p);
+        }
 
 //		System.out.println("listAll: " + productService.listAll());
 
