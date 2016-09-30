@@ -37,4 +37,8 @@ public class ProductService {
 		return products;
 	}
 
+    @Transactional
+    public Product lookupProduct(Integer id) {
+        return productDao.findOne(id);
+    }
 }

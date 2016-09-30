@@ -23,4 +23,12 @@ public class ProductDao {
 		return em.createQuery("SELECT p FROM Product p").getResultList();
 	}
 
+	public Product findOne(Integer id) {
+//        String namedQuery = "findOneProductById"; //uncomment this to get a lazy initialization exception.
+        String namedQuery = "findOneProductByIdWithParts";
+        return (Product) em.createNamedQuery(namedQuery).
+                setParameter("id", id).
+                getResultList().
+                get(0);
+    }
 }

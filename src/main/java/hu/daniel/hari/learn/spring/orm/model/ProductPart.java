@@ -74,6 +74,6 @@ public class ProductPart {
         return "ProductPart{" +
                 "id=" + id +
                 ", name='" + name +
-                '}';
+                "'}";
     }
 }

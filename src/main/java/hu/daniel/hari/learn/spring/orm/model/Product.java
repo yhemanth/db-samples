@@ -11,6 +11,16 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
+@NamedQueries({
+        @NamedQuery(
+                name="findOneProductByIdWithParts",
+                query="SELECT p FROM Product p JOIN FETCH p.parts WHERE p.id = :id"
+        ),
+        @NamedQuery(
+                name="findOneProductById",
+                query="SELECT p FROM Product p WHERE p.id = :id"
+        )
+})
 public class Product {
 
 	@Id

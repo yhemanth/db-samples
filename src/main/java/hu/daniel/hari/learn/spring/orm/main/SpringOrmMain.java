@@ -27,8 +27,11 @@ public class SpringOrmMain {
 
         productService.add(bulb);
         productService.add(mustard);
-		
-		System.out.println("listAll: " + productService.listAll());
+
+        Product product = productService.lookupProduct(2);
+        System.out.println(product);
+
+//		System.out.println("listAll: " + productService.listAll());
 
 		//Test transaction rollback (duplicated key)
 		
