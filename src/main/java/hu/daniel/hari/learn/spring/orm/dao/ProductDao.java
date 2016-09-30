@@ -7,6 +7,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import hu.daniel.hari.learn.spring.orm.model.ProductPart;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -30,5 +31,9 @@ public class ProductDao {
                 setParameter("id", id).
                 getResultList().
                 get(0);
+    }
+
+    public void deletePart(ProductPart part) {
+        em.remove(em.contains(part) ? part : em.merge(part));
     }
 }

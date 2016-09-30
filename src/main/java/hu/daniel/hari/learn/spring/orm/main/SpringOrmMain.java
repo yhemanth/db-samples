@@ -31,6 +31,15 @@ public class SpringOrmMain {
         Product product = productService.lookupProduct(2);
         System.out.println(product);
 
+        for (ProductPart part : product.getParts()) {
+            if (part.getName().equals("Leaf")) {
+                productService.deletePart(part);
+            }
+        }
+
+        Product product1 = productService.lookupProduct(2);
+        System.out.println(product1);
+
 //		System.out.println("listAll: " + productService.listAll());
 
 		//Test transaction rollback (duplicated key)

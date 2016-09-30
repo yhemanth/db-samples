@@ -6,6 +6,7 @@ import hu.daniel.hari.learn.spring.orm.model.Product;
 import java.util.Collection;
 import java.util.List;
 
+import hu.daniel.hari.learn.spring.orm.model.ProductPart;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -40,5 +41,10 @@ public class ProductService {
     @Transactional
     public Product lookupProduct(Integer id) {
         return productDao.findOne(id);
+    }
+
+    @Transactional
+    public void deletePart(ProductPart part) {
+        productDao.deletePart(part);
     }
 }
