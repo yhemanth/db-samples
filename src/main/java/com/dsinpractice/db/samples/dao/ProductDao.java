@@ -9,22 +9,23 @@ import javax.persistence.PersistenceContext;
 
 import com.dsinpractice.db.samples.model.ProductPart;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 @Component
 public class ProductDao {
 
-	@PersistenceContext
-	private EntityManager em;
+    @PersistenceContext
+    private EntityManager em;
 
-	public void persist(Product product) {
-		em.persist(product);
-	}
+    public void persist(Product product) {
+        em.persist(product);
+    }
 
-	public List<Product> findAll() {
-		return em.createQuery("SELECT p FROM Product p").getResultList();
-	}
+    public List<Product> findAll() {
+        return em.createQuery("SELECT p FROM Product p").getResultList();
+    }
 
-	public Product findOne(Integer id) {
+    public Product findOne(Integer id) {
 //        String namedQuery = "findOneProductById"; //uncomment this to get a lazy initialization exception.
         String namedQuery = "findOneProductByIdWithParts";
         return (Product) em.createNamedQuery(namedQuery).
@@ -37,7 +38,8 @@ public class ProductDao {
         em.remove(em.contains(part) ? part : em.merge(part));
     }
 
-	public void merge(Product product) {
-		em.merge(product);
-	}
+    @Transactional
+    public void merge(Product product) {
+        em.merge(product);
+    }
 }
