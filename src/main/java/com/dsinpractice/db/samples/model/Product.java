@@ -26,7 +26,7 @@ public class Product {
     private Integer id;
     private String name;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "product",cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<ProductPart> parts = new HashSet<>();
 
     public Product() {

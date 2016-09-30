@@ -38,11 +38,11 @@ public class TestAppEntityDeletionFromCollection {
         testProductAdded();
 
         // replicates problem that part does not get deleted - uncomment below line
-//        testUnsuccessfulDeleteProductPartDirect();
+        testSuccessfulDeleteProductPartDirect();
 
 //        testSuccessfulDeleteProductPartFromCollectionByName();
 
-        testSuccessfulDeleteProductPartFromCollection();
+//        testSuccessfulDeleteProductPartFromCollection();
     }
 
     private void testSuccessfulDeleteProductPartFromCollectionByName() {
@@ -90,11 +90,14 @@ public class TestAppEntityDeletionFromCollection {
         verifyDeleteAction();
     }
 
-    private void testUnsuccessfulDeleteProductPartDirect() {
+    private void testSuccessfulDeleteProductPartDirect() {
         Product product = productService.lookupProduct(2);
         for (ProductPart part : product.getParts()) {
             if (part.getName().equals("Leaf")) {
-                productService.deletePart(part);
+                //uncommenting line below (instead of deletePart) will fail deletion - as in, deletion will be a no-op
+                // See http://stackoverflow.com/a/16901857
+                //productService.deletePart(part);
+                productPartService.deletePart(part.getId());
             }
         }
         verifyDeleteAction();

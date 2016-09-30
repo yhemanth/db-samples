@@ -23,4 +23,9 @@ public class ProductPartService {
     public ProductPart lookupByName(String partName) {
         return productPartDao.findByName(partName);
     }
+
+    @Transactional
+    public void deletePart(Integer id) {
+        productPartDao.delete(id);
+    }
 }

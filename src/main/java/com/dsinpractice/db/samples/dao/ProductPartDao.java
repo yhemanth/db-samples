@@ -20,4 +20,9 @@ public class ProductPartDao {
     public ProductPart findByName(String partName) {
         return (ProductPart) em.createNamedQuery("findByName").setParameter("name", partName).getResultList().get(0);
     }
+
+    public void delete(Integer id) {
+        ProductPart productPart = em.find(ProductPart.class, id);
+        em.remove(em.contains(productPart) ? productPart : em.merge(productPart));
+    }
 }
